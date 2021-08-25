@@ -1,0 +1,7 @@
+flask
+flask_limiter
+line-bot-sdk
+pymongo
+dnspython
+bs4
+google-translate.py
