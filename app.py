@@ -78,7 +78,7 @@ def c(url, page):
         print(f"{page} | {e}")
 
 
-for i in range(1, 1):
+for i in range(1, 51):
     url = f"https://memes.tw/wtf?sort=top-week&contest=795&page={i}"
     t = threading.Thread(target=c, args=(url, i,))
     t.start()
