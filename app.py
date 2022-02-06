@@ -589,7 +589,7 @@ def handle_message(event):
         bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(badwords)))
     elif "學垃圾話:" in msg:
         if user_id == "Uddb208c296fcbafbff7c0488824d3471":
-            bot.reply_message(chatToken, TextSendMessage(msg))
+            bot.reply_message(chatToken, TextSendMessage(msg.split(":")[1]))
         else:
             bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     elif "忘記垃圾話:" in msg:
