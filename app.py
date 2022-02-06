@@ -588,12 +588,10 @@ def handle_message(event):
                     '說完了嗎? 敗類', '冷場王閉嘴', '可以不要破壞氣氛嗎? 你看你一講話就變超尷尬', ' <<<<社會敗類', ' <<<<沒救了', '']
         bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(badwords)))
     elif "學垃圾話:" in msg:
-        car = msg.split(":")[1]
         if user_id == "Uddb208c296fcbafbff7c0488824d3471":
-                badwords.append(car)
-                bot.reply_message(chatToken, TextSendMessage(f"已學習新的垃圾話:{car}"))
+            bot.reply_message(chatToken, TextSendMessage(msg))
         else:
-                bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
+            bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     elif "忘記垃圾話:" in msg:
         car = msg.split(":")[1]
         if event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471":
