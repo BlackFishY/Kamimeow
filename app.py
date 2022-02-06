@@ -581,24 +581,21 @@ def handle_message(event):
         user = event.source.user_id
         group_id = event.source.group_id
         take = bot.get_group_member_profile(group_id, user)
-        badwords = ['閉嘴', '有人叫你講話了?', '你這個死屁孩閉嘴', '請你安靜 謝謝', '去你的 閉嘴很難懂?', '可以安靜嗎 你很吵', '噓~這裡不需要你', '滾啦 沒有人叫你講話', '欠打?',
-                    '沒被打過?',
-                    '社會敗類閉嘴', '好了啦 你很吵你知道嗎', '可以閉嘴嗎?', '這個社會少了你 會更好', '你連禽獸不如 不要吵', '又舔 又舔 又舔嘴唇', ' <<<<3公分',
-                    '我建議你已讀就好不要打字 很丟臉',
-                    '說完了嗎? 敗類', '冷場王閉嘴', '可以不要破壞氣氛嗎? 你看你一講話就變超尷尬', ' <<<<社會敗類', ' <<<<沒救了', '']
+        badwords = ["你好"]
         bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(badwords)))
     elif "學垃圾話:" in msg:
         if user_id == "Uddb208c296fcbafbff7c0488824d3471":
-            bot.reply_message(chatToken, TextSendMessage(msg.split(":")[1]))
+            badwords.append(msg.split(":")[1])
+            bot.reply_message(chatToken, TextSendMessage(f"已學習新的垃圾話:{msg.split(":")[1]}"))
         else:
             bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     elif "忘記垃圾話:" in msg:
         car = msg.split(":")[1]
         if event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471":
-                badwords.remove(car)
-                bot.reply_message(chatToken, TextSendMessage(f"已忘記垃圾話:{car}"))
+            badwords.remove(msg.split(":")[1])
+            bot.reply_message(chatToken, TextSendMessage(f"已忘記垃圾話:{msg.split(":")[1]}"))
         else:
-                bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
+            bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     elif "學" in msg and len(lender) == 3:
         d = cb.find_one({'detect': str(lender[1])})
         if d is None:
