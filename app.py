@@ -583,22 +583,25 @@ def handle_message(event):
         user = event.source.user_id
         group_id = event.source.group_id
         take = bot.get_group_member_profile(group_id, user)
-        f = open("fuck.txt", encoding='utf-8')
-        lines = f.readlines()
-        test = []
-        for line in lines:
-            test.append(line.replace('\n', '').replace("''", ''))
-            f.close()
-        i = 0
-        while True:
-            if i < 10:
-                test.remove('')
-                i += 1
-            else:
-                break
-        last = []
-        for g in test:
-            last.append(str(g))
+        if user_id == "Uf5eefecbe1bedaf8f228eb1552e3832f":
+            bot.reply_message(chatToken, TextSendMessage("閉嘴臭海鮮你沒有發言權"))
+        else:
+            f = open("fuck.txt", encoding='utf-8')
+            lines = f.readlines()
+            test = []
+            for line in lines:
+                test.append(line.replace('\n', '').replace("''", ''))
+                f.close()
+            i = 0
+            while True:
+                if i < 10:
+                    test.remove('')
+                    i += 1
+                else:
+                    break
+            last = []
+            for g in test:
+                last.append(str(g))
         bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(last)))
     elif "學" in msg and len(lender) == 3:
         d = cb.find_one({'detect': str(lender[1])})
