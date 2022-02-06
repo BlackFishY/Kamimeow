@@ -584,23 +584,6 @@ def handle_message(event):
         group_id = event.source.group_id
         take = bot.get_group_member_profile(group_id, user)
         bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(badwords)))
-    elif "!學垃圾話:" in msg:
-        car = msg.split(":")
-        if user_id == "Uddb208c296fcbafbff7c0488824d3471":
-            badwords.append(car[1])
-            bot.reply_message(chatToken, TextSendMessage(f"已新增新的垃圾話:{car[1]}")
-        else:
-            bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
-    elif "!忘記垃圾話:" in msg:
-        car = msg.split(":")
-        if event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471":
-            if car[1] not in badwords:
-                bot.reply_message(chatToken, TextSendMessage(f"沒學過這句話")
-            else:
-                badwords.remove(car[1])
-                bot.reply_message(chatToken, TextSendMessage(f"已忘掉垃圾話:{car[1]}")
-        else:
-            bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     elif "學" in msg and len(lender) == 3:
         d = cb.find_one({'detect': str(lender[1])})
         if d is None:
