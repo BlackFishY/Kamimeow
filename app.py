@@ -594,7 +594,7 @@ def handle_message(event):
                 f.close()
             i = 0
             while True:
-                if i < 10:
+                if i < 52:
                     test.remove('')
                     i += 1
                 else:
