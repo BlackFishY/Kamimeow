@@ -568,19 +568,6 @@ def post_back(event):
                 tic.delete_one({"被攻擊者": user_id})
                 rpswait.remove(gotatkuser)
 
-badwords = ["你好"]
-
-def listToString(s): 
-    
-    # initialize an empty string
-    str1 = " " 
-    
-    # traverse in the string  
-    for ele in s: 
-        str1 += ele  
-    
-    # return string  
-    return str1
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -614,8 +601,6 @@ def handle_message(event):
                 bot.reply_message(chatToken, TextSendMessage(f"已忘掉垃圾話:{car[1]}")
         else:
             bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
-    elif "!所有垃圾話:" in msg:
-        bot.reply_message(chatToken, TextSendMessage(listToString(badwords)))
     elif "學" in msg and len(lender) == 3:
         d = cb.find_one({'detect': str(lender[1])})
         if d is None:
