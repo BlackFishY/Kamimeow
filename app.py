@@ -68,17 +68,7 @@ waitName = []
 circlewait = []
 heroks = []
 
-def listToString(s): 
-    
-    # initialize an empty string
-    str1 = "\n" 
-    
-    # traverse in the string  
-    for ele in s: 
-        str1 += ele  
-    
-    # return string  
-    return str1 
+
 
 def c(url, page):
     r = requests.get(url)
@@ -367,6 +357,7 @@ bullshit1 = []
 
 @handler.add(PostbackEvent)
 def post_back(event):
+
     chatToken = event.reply_token
     user_id = event.source.user_id
     postback = event.postback.data
@@ -577,6 +568,19 @@ def post_back(event):
                 tic.delete_one({"被攻擊者": user_id})
                 rpswait.remove(gotatkuser)
 
+badwords = ["你好"]
+
+def listToString(s): 
+    
+    # initialize an empty string
+    str1 = "\n" 
+    
+    # traverse in the string  
+    for ele in s: 
+        str1 += ele  
+    
+    # return string  
+    return str1
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
