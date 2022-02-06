@@ -585,8 +585,22 @@ def handle_message(event):
                     '沒被打過?',
                     '社會敗類閉嘴', '好了啦 你很吵你知道嗎', '可以閉嘴嗎?', '這個社會少了你 會更好', '你連禽獸不如 不要吵', '又舔 又舔 又舔嘴唇', ' <<<<3公分',
                     '我建議你已讀就好不要打字 很丟臉',
-                    '說完了嗎? 敗類', '冷場王閉嘴', '可以不要破壞氣氛嗎? 你看你一講話就變超尷尬', ' <<<<社會敗類', ' <<<<沒救了', ' <<<<秒射男']
+                    '說完了嗎? 敗類', '冷場王閉嘴', '可以不要破壞氣氛嗎? 你看你一講話就變超尷尬', ' <<<<社會敗類', ' <<<<沒救了', '']
         bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(badwords)))
+    elif "學垃圾話:" in msg:
+        car = msg.split(":")[1]
+        if user_id == "Uddb208c296fcbafbff7c0488824d3471":
+                badwords.append(car)
+                bot.reply_message(chatToken, TextSendMessage(f"已學習新的垃圾話:{car}"))
+        else:
+                bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
+    elif "忘記垃圾話:" in msg:
+        car = msg.split(":")[1]
+        if event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471":
+                badwords.remove(car)
+                bot.reply_message(chatToken, TextSendMessage(f"已忘記垃圾話:{car}"))
+        else:
+                bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     elif "學" in msg and len(lender) == 3:
         d = cb.find_one({'detect': str(lender[1])})
         if d is None:
