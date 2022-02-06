@@ -599,7 +599,7 @@ def handle_message(event):
         last = []
         for g in test:
             last.append(str(g))
-        bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(random.choice(last))))
+        bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(last)))
     elif "學" in msg and len(lender) == 3:
         d = cb.find_one({'detect': str(lender[1])})
         if d is None:
