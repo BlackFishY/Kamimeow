@@ -482,7 +482,7 @@ class Commands:
             f.close()
         i = 0
         while True:
-            if i < 199:
+            if i < 249:
                 test.remove('')
                 i += 1
             else:

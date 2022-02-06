@@ -583,7 +583,23 @@ def handle_message(event):
         user = event.source.user_id
         group_id = event.source.group_id
         take = bot.get_group_member_profile(group_id, user)
-        bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(badwords)))
+        f = open("fuck.txt", encoding='utf-8')
+        lines = f.readlines()
+        test = []
+        for line in lines:
+            test.append(line.replace('\n', '').replace("''", ''))
+            f.close()
+        i = 0
+        while True:
+            if i < 10:
+                test.remove('')
+                i += 1
+            else:
+                break
+        last = []
+        for g in test:
+            last.append(str(g).split('.')[1])
+        bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(random.choice(last))))
     elif "學" in msg and len(lender) == 3:
         d = cb.find_one({'detect': str(lender[1])})
         if d is None:
