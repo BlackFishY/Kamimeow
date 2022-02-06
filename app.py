@@ -586,7 +586,7 @@ def handle_message(event):
     elif "學垃圾話:" in msg:
         car = msg.split(":")
         if user_id == "Uddb208c296fcbafbff7c0488824d3471":
-            bot.reply_message(chatToken, TextSendMessage(car))
+            bot.reply_message(chatToken, TextSendMessage(car[1]))
         else:
             bot.reply_message(chatToken, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     elif "忘記垃圾話:" in msg:
