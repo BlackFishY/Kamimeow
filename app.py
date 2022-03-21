@@ -1477,7 +1477,8 @@ def handle_message(event):
                                                      " 🛑此為群組機器人🛑\n"
                                                      "🛑私聊版本還未開放🛑"))
     elif msg == "!個人資料":
-        bot.reply_message(chatToken, TextSendMessage(f"您的user_ID為:{user_id}"))
+        user = user_id
+        bot.reply_message(chatToken, TextSendMessage(f"您的user_ID為:{user_id}" + "Type" + type(user)))
     elif msg == "!群組資料":
         team = bot.get_group_summary(event.source.group_id)
         group_count = bot.get_group_members_count(event.source.group_id)
