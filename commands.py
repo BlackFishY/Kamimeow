@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 
-Admin = []
+Admin = ["Uddb208c296fcbafbff7c0488824d3471"]
 bot = LineBotApi(
     'R2EQ91eZrOij+P9TsvsuA9g3BkgNkMlnXihtzAt9uGW0c8PPONHRlnquTZ15TxY0F9dn3RXrPlfNW9ROMFAkRYSHxIXYNy+CLMTQbKbMuynhnzTH4HRnOdyudl3uYCjCHhhPPUoHrIopw/r1pJpfYQdB04t89/1O/w1cDnyilFU=')
 client = pymongo.MongoClient(
