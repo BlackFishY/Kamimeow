@@ -87,10 +87,8 @@ class Commands:
     def allAdmin(self, event, args):
         if event.source.user_id in Admin:
              user = event.source.user_id
-             mentionuser = event.message.mention.mentionees[0].user_id
              group_id = event.source.group_id
              take = bot.get_group_member_profile(group_id, user)
-             mentiontake = bot.get_group_member_profile(group_id, mentionuser)
              self.bot.reply_message(self.token, TextSendMessage(f"以下為擁有權限之user_ID的列表" + Admin))
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
