@@ -55,7 +55,7 @@ class Commands:
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def Admin(self, event, args):
-        if event.source.user_id in Admin:
+        if event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471":
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
@@ -70,7 +70,7 @@ class Commands:
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def deAdmin(self, event, args):
-        if event.source.user_id in Admin:
+        if event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471":
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
