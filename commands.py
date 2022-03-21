@@ -39,7 +39,7 @@ class Commands:
         self.bot = bot
         self.token = token
     def add(self, event, args):
-        if int(event.source.user_id) in Admin:
+        if event.source.user_id in Admin:
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
@@ -54,30 +54,30 @@ class Commands:
                 return
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
-    def admin(self, event, args):
-        if int(event.source.user_id) in Admin:
+    def Admin(self, event, args):
+        if event.source.user_id in Admin:
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
                 group_id = event.source.group_id
                 take = bot.get_group_member_profile(group_id, user)
                 mentiontake = bot.get_group_member_profile(group_id, mentionuser)
-                Admin.append(int(mentionuser))
+                Admin.append(mentionuser)
                 self.bot.reply_message(self.token, TextSendMessage("成功新增該使用者"))
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
                 return
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
-    def deadmin(self, event, args):
-        if int(event.source.user_id) in Admin:
+    def deAdmin(self, event, args):
+        if event.source.user_id in Admin:
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
                 group_id = event.source.group_id
                 take = bot.get_group_member_profile(group_id, user)
                 mentiontake = bot.get_group_member_profile(group_id, mentionuser)
-                Admin.remove(int(mentionuser))
+                Admin.remove(mentionuser)
                 self.bot.reply_message(self.token, TextSendMessage("成功移除該使用者"))
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
@@ -85,17 +85,17 @@ class Commands:
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def allAdmin(self, event, args):
-        if int(event.source.user_id) in Admin:
+        if event.source.user_id in Admin:
              user = event.source.user_id
              mentionuser = event.message.mention.mentionees[0].user_id
              group_id = event.source.group_id
              take = bot.get_group_member_profile(group_id, user)
              mentiontake = bot.get_group_member_profile(group_id, mentionuser)
-             self.bot.reply_message(self.token, TextSendMessage(f"以下為擁有權限之user_ID" + Admin))
+             self.bot.reply_message(self.token, TextSendMessage(f"以下為擁有權限之user_ID的列表" + Admin))
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def block(self, event, args):
-        if int(event.source.user_id) in Admin:
+        if event.source.user_id in Admin:
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
@@ -114,7 +114,7 @@ class Commands:
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def deblock(self, event, args):
-        if int(event.source.user_id) in Admin:
+        if event.source.user_id in Admin:
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
