@@ -89,7 +89,7 @@ class Commands:
              user = event.source.user_id
              group_id = event.source.group_id
              take = bot.get_group_member_profile(group_id, user)
-             self.bot.reply_message(self.token, TextSendMessage(f"以下為擁有權限之user_ID的列表" + Admin))
+             self.bot.reply_message(self.token, TextSendMessage(f"以下為擁有權限之user_ID的列表" + str(Admin)))
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def block(self, event, args):
