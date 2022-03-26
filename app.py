@@ -571,7 +571,7 @@ def post_back(event):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    print(event)
+    print(event.message.text)
     cached_messages[event.message.id] = event.message.text
     msg = event.message.text
     chatToken = event.reply_token
