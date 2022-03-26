@@ -52,10 +52,35 @@ class Commands:
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
                 return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                deposit = R_deposit.find_one({"user": mentionuser})
+                R_deposit.update_one({"user": mentionuser}, {"$set": {"deposit": round(deposit['deposit'] + 7, 2)}})
+                self.bot.reply_message(self.token, TextSendMessage("成功新增該使用者7元"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def Admin(self, event, args):
-        if event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+        if event.source.user_id in Admin:
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                Admin.append(mentionuser)
+                self.bot.reply_message(self.token, TextSendMessage("成功新增該使用者"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
@@ -70,7 +95,19 @@ class Commands:
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def deAdmin(self, event, args):
-        if event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+        if event.source.user_id in Admin:
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                Admin.remove(mentionuser)
+                self.bot.reply_message(self.token, TextSendMessage("成功移除該使用者"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
@@ -86,6 +123,11 @@ class Commands:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def allAdmin(self, event, args):
         if event.source.user_id in Admin:
+             user = event.source.user_id
+             group_id = event.source.group_id
+             take = bot.get_group_member_profile(group_id, user)
+             self.bot.reply_message(self.token, TextSendMessage(f"以下為擁有權限之user_ID的列表" + str(Admin)))
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
              user = event.source.user_id
              group_id = event.source.group_id
              take = bot.get_group_member_profile(group_id, user)
@@ -109,10 +151,38 @@ class Commands:
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
                 return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                data = {
+                    "name": mentiontake.display_name,
+                    "user": mentionuser
+                }
+                bk.insert(data)
+                self.bot.reply_message(self.token, TextSendMessage("成功新增該使用者"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def deblock(self, event, args):
         if event.source.user_id in Admin:
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                bk.delete_one({"user": mentionuser})
+                self.bot.reply_message(self.token, TextSendMessage("成功移除該使用者"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
@@ -331,186 +401,6 @@ class Commands:
         except AttributeError:
             self.bot.reply_message(self.token, TextSendMessage("請@你要挑戰的人哦~"))
             return
-    def pttT(self, event, args):
-        r = requests.get("https://www.pttweb.cc/hot/all/today")
-        soup = BeautifulSoup(r.text, 'html.parser')
-        tittle2 = soup.find_all("span", class_="e7-show-if-device-is-not-xs")  # 標題
-        links = soup.find_all("a", {"data-v-efd3e102": True})
-        reply2 = soup.find_all(class_="e7-recommendCount text-no-wrap e7-grey-text")
-        tittle = []
-        href = []
-        reply = []
-        i = 0
-        for tittle1 in tittle2:
-            tittle0 = tittle1.getText()
-            tittle.append(tittle0)
-        noRepeat = []
-        for link in links:
-            if link.getText() == "":
-                pass
-            if len(link["href"]) > 18 and link["href"] not in noRepeat:
-                noRepeat.append(link["href"])
-                href.append("https://www.pttweb.cc" + link["href"])
-        for reply1 in reply2:
-            reply0 = str(list(reply1)[1]).replace(" ", "").replace("\n", "")
-            reply.append(reply0)
-        message = "🔥文章PTT-今日熱門🔥\n"
-        while True:
-            if i <= 30:
-                message += "⚜標題:\n" \
-                           f"{tittle[i]}\n" \
-                           f"✔連結:\n" \
-                           f"{href[i]}\n" \
-                           f"💬留言數:\n" \
-                           f"▶{reply[i]}◀\n"
-                i += 1
-            else:
-                self.bot.reply_message(self.token, TextSendMessage(message))
-                break
-    def pttN(self, event, args):
-        r = requests.get("https://www.pttweb.cc/hot/all")
-        soup = BeautifulSoup(r.text, 'html.parser')
-        tittle2 = soup.find_all("span", class_="e7-show-if-device-is-not-xs")  # 標題
-        links = soup.find_all("a", {"data-v-efd3e102": True})
-        reply2 = soup.find_all(class_="e7-recommendCount text-no-wrap e7-grey-text")
-        tittle = []
-        href = []
-        reply = []
-        i = 0
-        for tittle1 in tittle2:
-            tittle0 = tittle1.getText()
-            tittle.append(tittle0)
-        noRepeat = []
-        for link in links:
-            if link.getText() == "":
-                pass
-            if len(link["href"]) > 18 and link["href"] not in noRepeat:
-                noRepeat.append(link["href"])
-                href.append("https://www.pttweb.cc" + link["href"])
-        for reply1 in reply2:
-            reply0 = str(list(reply1)[1]).replace(" ", "").replace("\n", "")
-            reply.append(reply0)
-        message = "📍文章PTT-最新熱門📍\n"
-        while True:
-            if i <= 30:
-                message += "⚜標題:\n" \
-                           f"{tittle[i]}\n" \
-                           f"✔連結:\n" \
-                           f"{href[i]}\n" \
-                           f"💬留言數:\n" \
-                           f"▶{reply[i]}◀\n"
-                i += 1
-            else:
-                self.bot.reply_message(self.token, TextSendMessage(message))
-                break
-    def pttL(self, event, args):
-        r = requests.get("https://www.pttweb.cc/hot/all/yesterday")
-        soup = BeautifulSoup(r.text, 'html.parser')
-        tittle2 = soup.find_all("span", class_="e7-show-if-device-is-not-xs")  # 標題
-        links = soup.find_all("a", {"data-v-efd3e102": True})
-        reply2 = soup.find_all(class_="e7-recommendCount text-no-wrap e7-grey-text")
-        tittle = []
-        href = []
-        reply = []
-        i = 0
-        for tittle1 in tittle2:
-            tittle0 = tittle1.getText()
-            tittle.append(tittle0)
-        noRepeat = []
-        for link in links:
-            if link.getText() == "":
-                pass
-            if len(link["href"]) > 18 and link["href"] not in noRepeat:
-                noRepeat.append(link["href"])
-                href.append("https://www.pttweb.cc" + link["href"])
-        for reply1 in reply2:
-            reply0 = str(list(reply1)[1]).replace(" ", "").replace("\n", "")
-            reply.append(reply0)
-        message = "💫文章PTT-昨日熱門💫\n"
-        while True:
-            if i <= 30:
-                message += "⚜標題:\n" \
-                           f"{tittle[i]}\n" \
-                           f"✔連結:\n" \
-                           f"{href[i]}\n" \
-                           f"💬留言數:\n" \
-                           f"▶{reply[i]}◀\n"
-                i += 1
-            else:
-                self.bot.reply_message(self.token, TextSendMessage(message))
-                break
-    def pttW(self, event, args):
-        r = requests.get("https://www.pttweb.cc/hot/all/this-week")
-        soup = BeautifulSoup(r.text, 'html.parser')
-        tittle2 = soup.find_all("span", class_="e7-show-if-device-is-not-xs")  # 標題
-        links = soup.find_all("a", {"data-v-efd3e102": True})
-        reply2 = soup.find_all(class_="e7-recommendCount text-no-wrap e7-grey-text")
-        tittle = []
-        href = []
-        reply = []
-        i = 0
-        for tittle1 in tittle2:
-            tittle0 = tittle1.getText()
-            tittle.append(tittle0)
-        noRepeat = []
-        for link in links:
-            if link.getText() == "":
-                pass
-            if len(link["href"]) > 18 and link["href"] not in noRepeat:
-                noRepeat.append(link["href"])
-                href.append("https://www.pttweb.cc" + link["href"])
-        for reply1 in reply2:
-            reply0 = str(list(reply1)[1]).replace(" ", "").replace("\n", "")
-            reply.append(reply0)
-        message = "🎇文章PTT-本週熱門🎇\n"
-        while True:
-            if i <= 30:
-                message += "⚜標題:\n" \
-                           f"{tittle[i]}\n" \
-                           f"✔連結:\n" \
-                           f"{href[i]}\n" \
-                           f"💬留言數:\n" \
-                           f"▶{reply[i]}◀\n"
-                i += 1
-            else:
-                self.bot.reply_message(self.token, TextSendMessage(message))
-                break
-    def pttM(self, event, args):
-        r = requests.get("https://www.pttweb.cc/hot/all/this-month")
-        soup = BeautifulSoup(r.text, 'html.parser')
-        tittle2 = soup.find_all("span", class_="e7-show-if-device-is-not-xs")  # 標題
-        links = soup.find_all("a", {"data-v-efd3e102": True})
-        reply2 = soup.find_all(class_="e7-recommendCount text-no-wrap e7-grey-text")
-        tittle = []
-        href = []
-        reply = []
-        i = 0
-        for tittle1 in tittle2:
-            tittle0 = tittle1.getText()
-            tittle.append(tittle0)
-        noRepeat = []
-        for link in links:
-            if link.getText() == "":
-                pass
-            if len(link["href"]) > 18 and link["href"] not in noRepeat:
-                noRepeat.append(link["href"])
-                href.append("https://www.pttweb.cc" + link["href"])
-        for reply1 in reply2:
-            reply0 = str(list(reply1)[1]).replace(" ", "").replace("\n", "")
-            reply.append(reply0)
-        message = "🖤文章PTT-本月熱門❤\n"
-        while True:
-            if i <= 30:
-                message += "⚜標題:\n" \
-                           f"{tittle[i]}\n" \
-                           f"✔連結:\n" \
-                           f"{href[i]}\n" \
-                           f"💬留言數:\n" \
-                           f"▶{reply[i]}◀\n"
-                i += 1
-            else:
-                self.bot.reply_message(self.token, TextSendMessage(message))
-                break
     def 小冷(self, event, args):
         f = open("cold.txt", encoding='utf-8')
         lines = f.readlines()
