@@ -595,14 +595,13 @@ def handle_message(event, cct=0):
                           f"個人聊天室\n"
                           f"說:\n"
                           f"{msg}")
-    for ct in allMessage:
-        cct += len(ct)
-    if cct > 1900:
-        allMessage.clear()
-        bot.reply_message(chatToken, TextSendMessage("已清空allMessage"))
-    elif len(unsendlist) >= 20:
+
+    if len(unsendlist) >= 20:
         unsendlist.clear()
         unsendall.clear()
+    elif msg == "!清空訊息":
+        allMessage.clear()
+        bot.reply_message(chatToken, TextSendMessage("已清空allMessage"))
     elif bk.find_one({"user": user_id}) is not None:
         user = event.source.user_id
         group_id = event.source.group_id
