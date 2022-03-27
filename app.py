@@ -597,7 +597,7 @@ def handle_message(event, cct=0):
     if len(unsendlist) >= 20:
         unsendlist.clear()
         unsendall.clear()
-    elif msg == "!清空訊息" and user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+    elif msg == "!清空訊息":
         allMessage.clear()
         bot.reply_message(chatToken, TextSendMessage("已清空allMessage"))
     elif bk.find_one({"user": user_id}) is not None:
@@ -1457,7 +1457,7 @@ def handle_message(event, cct=0):
             lease = sent[f"{user_id}"]
             bot.reply_message(chatToken, TextSendMessage(f"迷因系統冷卻中，還有\n"
                                                          f"{lease}/10秒"))
-    elif msg == "!所有訊息" and user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+    elif msg == "!所有訊息":
         try:
             allCmessage = ""
             for i in allMessage:
