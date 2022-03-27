@@ -568,16 +568,39 @@ def post_back(event):
                 tic.delete_one({"被攻擊者": user_id})
                 rpswait.remove(gotatkuser)
 
+allMessage = ["(1)用戶名稱:(2)群組名:(3)發送的訊息"]
+cct = 0
+
 
 @handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
+def handle_message(event, cct=0):
     print(event.message.text)
     cached_messages[event.message.id] = event.message.text
     msg = event.message.text
     chatToken = event.reply_token
     user_id = event.source.user_id
     lender = msg.split(";")
-    if len(unsendlist) >= 20:
+    try: #群組裡
+        team = bot.get_group_summary(event.source.group_id)
+        teamtake = bot.get_group_member_profile(event.source.group_id, user_id)
+        allMessage.append(f"👶{teamtake.display_name}\n"
+                          f"在:\n"
+                          f"{team.group_name}\n"
+                          f"說:\n"
+                          f"{msg}")
+    except:  #個人
+        alone = bot.get_profile(user_id)
+        allMessage.append(f"{alone.display_name}\n"
+                          f"在:\n"
+                          f"個人聊天室\n"
+                          f"說:\n"
+                          f"{msg}")
+    for ct in allMessage:
+        cct += len(ct)
+    if cct > 1900:
+        allMessage.clear()
+        bot.reply_message(chatToken, TextSendMessage("已清空allMessage"))
+    elif len(unsendlist) >= 20:
         unsendlist.clear()
         unsendall.clear()
     elif bk.find_one({"user": user_id}) is not None:
@@ -1437,6 +1460,11 @@ def handle_message(event):
             lease = sent[f"{user_id}"]
             bot.reply_message(chatToken, TextSendMessage(f"迷因系統冷卻中，還有\n"
                                                          f"{lease}/10秒"))
+    elif msg == "!所有訊息":
+        allCmessage = ""
+        for i in allMessage:
+            allCmessage += i
+        bot.reply_message(chatToken, TextSendMessage(allCmessage))
     elif msg == "!幫助":
         bot.reply_message(chatToken, TextSendMessage("⚠=🤍=🤖=指令區=🤖=🤍=\n"
                                                      "🔰功能指令🔰\n"
