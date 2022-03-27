@@ -1459,11 +1459,15 @@ def handle_message(event, cct=0):
             bot.reply_message(chatToken, TextSendMessage(f"迷因系統冷卻中，還有\n"
                                                          f"{lease}/10秒"))
     elif msg == "!所有訊息":
-        if user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
-            allCmessage = ""
-            for i in allMessage:
-                allCmessage += i
-            bot.reply_message(chatToken, TextSendMessage(allCmessage))
+        if user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942"
+            try:
+                allCmessage = ""
+                for i in allMessage:
+                    allCmessage += i
+                bot.reply_message(chatToken, TextSendMessage(allCmessage))
+            except:
+                allMessage.clear()
+                bot.reply_message(chatToken, TextSendMessage("字數超過5000字已清空列表"))
         else:
             bot.reply_message(chatToken, TextSendMessage("你沒權限"))
     elif msg == "!幫助":
