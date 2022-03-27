@@ -568,7 +568,7 @@ def post_back(event):
                 tic.delete_one({"被攻擊者": user_id})
                 rpswait.remove(gotatkuser)
 
-allMessage = ["(1)用戶名稱:(2)群組名:(3)發送的訊息"]
+allMessage = []
 cct = 0
 
 
@@ -583,18 +583,14 @@ def handle_message(event, cct=0):
     try: #群組裡
         team = bot.get_group_summary(event.source.group_id)
         teamtake = bot.get_group_member_profile(event.source.group_id, user_id)
-        allMessage.append(f"👶{teamtake.display_name}\n"
-                          f"在:\n"
-                          f"{team.group_name}\n"
-                          f"說:\n"
-                          f"{msg}")
+        allMessage.append(f"👶:【{teamtake.display_name}】\n"
+                          f"🚩:【{team.group_name}】\n"
+                          f"💬:【{msg}】\n")
     except:  #個人
         alone = bot.get_profile(user_id)
-        allMessage.append(f"{alone.display_name}\n"
-                          f"在:\n"
-                          f"個人聊天室\n"
-                          f"說:\n"
-                          f"{msg}")
+        allMessage.append(f"👶:【{alone.display_name}】\n"
+                          f"🚩:【與卡米喵的私聊】\n"
+                          f"💬:【{msg}】\n")
 
     if len(unsendlist) >= 20:
         unsendlist.clear()
