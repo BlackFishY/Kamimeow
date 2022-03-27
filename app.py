@@ -596,8 +596,11 @@ def handle_message(event, cct=0):
         unsendlist.clear()
         unsendall.clear()
     elif msg == "!清空訊息":
-        allMessage.clear()
-        bot.reply_message(chatToken, TextSendMessage("已清空allMessage"))
+        if user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+            allMessage.clear()
+            bot.reply_message(chatToken, TextSendMessage("已清空allMessage"))
+        else:
+            bot.reply_message(chatToken, TextSendMessage("你沒權限"))
     elif bk.find_one({"user": user_id}) is not None:
         user = event.source.user_id
         group_id = event.source.group_id
@@ -1456,10 +1459,13 @@ def handle_message(event, cct=0):
             bot.reply_message(chatToken, TextSendMessage(f"迷因系統冷卻中，還有\n"
                                                          f"{lease}/10秒"))
     elif msg == "!所有訊息":
-        allCmessage = ""
-        for i in allMessage:
-            allCmessage += i
-        bot.reply_message(chatToken, TextSendMessage(allCmessage))
+        if user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+            allCmessage = ""
+            for i in allMessage:
+                allCmessage += i
+            bot.reply_message(chatToken, TextSendMessage(allCmessage))
+        else:
+            bot.reply_message(chatToken, TextSendMessage("你沒權限"))
     elif msg == "!幫助":
         bot.reply_message(chatToken, TextSendMessage("⚠=🤍=🤖=指令區=🤖=🤍=\n"
                                                      "🔰功能指令🔰\n"
