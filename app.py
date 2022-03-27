@@ -583,14 +583,16 @@ def handle_message(event, cct=0):
     try: #群組裡
         team = bot.get_group_summary(event.source.group_id)
         teamtake = bot.get_group_member_profile(event.source.group_id, user_id)
-        allMessage.append(f"👶:【{teamtake.display_name}】\n"
-                          f"🚩:【{team.group_name}】\n"
-                          f"💬:【{msg}】\n")
+        allMessage.append(f"🧑‍💻:【{teamtake.display_name}】\n"
+                          f"👪:【{team.group_name}】\n"
+                          f"💬:【{msg}】\n"
+                          f"\n")
     except:  #個人
         alone = bot.get_profile(user_id)
-        allMessage.append(f"👶:【{alone.display_name}】\n"
-                          f"🚩:【與卡米喵的私聊】\n"
-                          f"💬:【{msg}】\n")
+        allMessage.append(f"🧑‍💻:【{alone.display_name}】\n"
+                          f"👪:【與卡米喵的私聊】\n"
+                          f"💬:【{msg}】\n"
+                          f"\n")
 
     if len(unsendlist) >= 20:
         unsendlist.clear()
@@ -1459,7 +1461,7 @@ def handle_message(event, cct=0):
             bot.reply_message(chatToken, TextSendMessage(f"迷因系統冷卻中，還有\n"
                                                          f"{lease}/10秒"))
     elif msg == "!所有訊息":
-        if user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942"
+        if user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
             try:
                 allCmessage = ""
                 for i in allMessage:
