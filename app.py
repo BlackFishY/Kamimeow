@@ -1148,8 +1148,7 @@ def handle_message(event, cct=0):
             return
     elif user_id in trans1:
         unknown.append(msg)
-        bot.reply_message(chatToken, TextSendMessage("請輸入你想
-                                                     成哪國語言:\n"
+        bot.reply_message(chatToken, TextSendMessage("請輸入你想翻譯成哪國語言:\n"
                                                      "英文\n"
                                                      "日文\n"
                                                      "韓文\n"
