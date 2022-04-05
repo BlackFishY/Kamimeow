@@ -47,7 +47,7 @@ class Commands:
                 take = bot.get_group_member_profile(group_id, user)
                 mentiontake = bot.get_group_member_profile(group_id, mentionuser)
                 deposit = R_deposit.find_one({"user": mentionuser})
-                R_deposit.update_one({"user": mentionuser}, {"$set": {"deposit": round(deposit['deposit'] + 30, 2)}})
+                R_deposit.update_one({"user": mentionuser}, {"$set": {"deposit": round(deposit['deposit'] + 30, 9)}})
                 self.bot.reply_message(self.token, TextSendMessage("成功新增該使用者30元"))
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
