@@ -47,7 +47,7 @@ class Commands:
                 take = bot.get_group_member_profile(group_id, user)
                 mentiontake = bot.get_group_member_profile(group_id, mentionuser)
                 deposit = R_deposit.find_one({"user": mentionuser})
-                R_deposit.update_one({"user": mentionuser}, {"$set": {"deposit": round(deposit['deposit'] + 7, 2)}})
+                R_deposit.update_one({"user": mentionuser}, {"$set": {"deposit": round(deposit['deposit'] + 30, 2)}})
                 self.bot.reply_message(self.token, TextSendMessage("成功新增該使用者7元"))
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
@@ -80,6 +80,18 @@ class Commands:
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
                 return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                Admin.append(mentionuser)
+                self.bot.reply_message(self.token, TextSendMessage("成功新增該使用者"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def deAdmin(self, event, args):
@@ -95,10 +107,27 @@ class Commands:
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
                 return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                Admin.remove(mentionuser)
+                self.bot.reply_message(self.token, TextSendMessage("成功移除該使用者"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def allAdmin(self, event, args):
         if event.source.user_id in Admin:
+             user = event.source.user_id
+             group_id = event.source.group_id
+             take = bot.get_group_member_profile(group_id, user)
+             self.bot.reply_message(self.token, TextSendMessage(f"以下為擁有權限之user_ID的列表" + str(Admin)))
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
              user = event.source.user_id
              group_id = event.source.group_id
              take = bot.get_group_member_profile(group_id, user)
@@ -122,10 +151,38 @@ class Commands:
             except AttributeError:
                 self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
                 return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                data = {
+                    "name": mentiontake.display_name,
+                    "user": mentionuser
+                }
+                bk.insert(data)
+                self.bot.reply_message(self.token, TextSendMessage("成功新增該使用者"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
         else:
             self.bot.reply_message(self.token, TextSendMessage("抱歉 你沒有權限執行這條指令"))
     def deblock(self, event, args):
         if event.source.user_id in Admin:
+            try:
+                user = event.source.user_id
+                mentionuser = event.message.mention.mentionees[0].user_id
+                group_id = event.source.group_id
+                take = bot.get_group_member_profile(group_id, user)
+                mentiontake = bot.get_group_member_profile(group_id, mentionuser)
+                bk.delete_one({"user": mentionuser})
+                self.bot.reply_message(self.token, TextSendMessage("成功移除該使用者"))
+            except AttributeError:
+                self.bot.reply_message(self.token, TextSendMessage("請@正確目標對象"))
+                return
+        elif event.source.user_id == "Uddb208c296fcbafbff7c0488824d3471" or "U7cbf5b2d266cf420022099d9b9f37942":
             try:
                 user = event.source.user_id
                 mentionuser = event.message.mention.mentionees[0].user_id
