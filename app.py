@@ -624,6 +624,9 @@ def handle_message(event, cct=0):
             for g in test:
                 last.append(str(g))
         bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(last)))
+    elif "疫情" in msg:
+        bot.reply_message(chatToken, TextSendMessage("台灣的疫情即時情況(同步政府):\n"
+                                                     "https://tw-covid-19.herokuapp.com"))
     elif "學" in msg and len(lender) == 3:
         d = cb.find_one({'detect': str(lender[1])})
         if d is None:
@@ -1504,6 +1507,8 @@ def handle_message(event, cct=0):
                                                      "3.翻譯系統:如果15秒內沒打\n"
                                                      "!複製or!停止\n"
                                                      "系統將會自動退出翻譯程序\n"
+                                                     "即時台灣疫情:\n"
+                                                     "https://tw-covid-19.herokuapp.com \n"
                                                      " 🛑此為群組機器人🛑\n"
                                                      "🛑私聊版本還未開放🛑"))
     elif msg == "!個人資料":
