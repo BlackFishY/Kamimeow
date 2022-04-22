@@ -624,7 +624,7 @@ def handle_message(event, cct=0):
             for g in test:
                 last.append(str(g))
         bot.reply_message(chatToken, TextSendMessage(take.display_name + " " + random.choice(last)))
-    elif "疫情" in msg:
+    elif "疫情如何" in msg:
         bot.reply_message(chatToken, TextSendMessage("台灣的疫情即時情況(同步政府):\n"
                                                      "https://tw-covid-19.herokuapp.com"))
     elif "學" in msg and len(lender) == 3:
